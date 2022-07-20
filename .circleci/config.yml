@@ -30,7 +30,7 @@ jobs:
           name: Front-end Deploy
           command: |
             cd udagram/udagram-frontend
-            aws s3 cp --recursive --acl public-read ./www s3://udagram-ui-bck/
+            aws s3 cp --recursive --acl public-read ./www s3://udagram-ui-bk/
       - run:
       # This job installs the back-end dependencies
           name: Back-end Install
@@ -45,7 +45,7 @@ jobs:
             # This job deploys the back-end using the installed Elastic Beanstalk CLI
           name: Back-end Deploy
           command: |
-            eb init --region us-east-1 --platform node.js Udagramnodejs-env
+            eb init --region us-east-1 --platform node.js Udagramapi-env
             npm run api:deploy
 workflows:
   build-deploy:
