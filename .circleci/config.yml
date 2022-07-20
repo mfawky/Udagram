@@ -9,40 +9,40 @@ jobs:
       - image: "cimg/base:stable"
     steps:
       - checkout
-      # Setting up AWS CLI
+      # adding AWS CLI
       - aws-cli/setup
-      # Installing Node.js runtime
+      # adding nodejs
       - node/install
-      # Setting up Elastic Beanstalk
+      # adding elb
       - eb/setup
       - run:
-      # This job installs the front-end dependencies
+      # adding frontend files
           name: Front-end install
           command: |
             npm run frontend:install
       - run:
-      # This job builds the front-end
+      # building frontend
           name: Front-end Build
           command: |
             npm run frontend:build
       - run:
-      # This job deploys the front-end using the installed AWS CLI
+      # deploying frontend using AWS CLI
           name: Front-end Deploy
           command: |
             cd udagram/udagram-frontend
             aws s3 cp --recursive --acl public-read ./www s3://udagram-ui-bk/
       - run:
-      # This job installs the back-end dependencies
+      # instaling backend files
           name: Back-end Install
           command: |
             npm run api:install
       - run:
-      # This job builds the back-end
+      # building backend
           name: Back-end Build
           command: |
             npm run api:build
       - run:
-            # This job deploys the back-end using the installed Elastic Beanstalk CLI
+            # deploying back-end using elb CLI
           name: Back-end Deploy
           command: |
             eb init --region us-east-1 --platform node.js Udagramapi-env
