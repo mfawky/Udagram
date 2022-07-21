@@ -12,7 +12,7 @@
     "dev": "npx ts-node-dev --respawn --transpile-only ./src/server.ts",
     "prod": "npx tsc && node ./www/server.js",
     "clean": "rm -rf www/ || true",
-    "deploy": "npm run build && eb list && eb use Udagramapi-env && eb deploy --version udagram-api-source && eb setenv POSTGRES_USERNAME=postgres POSTGRES_PASSWORD=12345678 PORT_DB=5432 PORT=4000 POSTGRES_HOST=database-1.czoqewza6agm.us-east-1.rds.amazonaws.com POSTGRES_DB=u_db JWT_SECRET=secret AWS_REGION=us-east-1 AWS_PROFILE=default AWS_BUCKET=udagram-media-bk",
+    "deploy": "npm run build && eb list && eb use Udagramapi-env && eb deploy --version udagram-api-source",
     "build": "npm install . && npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json && cd www && zip -r Archive.zip . && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
